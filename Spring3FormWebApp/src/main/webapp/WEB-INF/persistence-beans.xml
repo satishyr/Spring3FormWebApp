@@ -1,0 +1,27 @@
+<beans
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/beans">
+
+	<bean p:password="root" p:username="root"
+		p:url="jdbc:mysql://localhost:3306/spring"
+		p:driverClassName="com.mysql.jdbc.Driver" name="dmds"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource" />
+
+	<bean name="jtobj"
+		class="org.springframework.jdbc.core.JdbcTemplate"
+		p:dataSource-ref="dmds" />
+
+
+	<!-- cfg DAO class -->
+	<bean id="empDAO" class="in.nit.dao.EmployeeDAOImpl">
+		<constructor-arg ref="jtobj" />
+	</bean>
+	<!-- <bean id="empDAO" class="in.nit.dao.EmployeeDAOImpl1"> <constructor-arg 
+		ref="jtobj"/> </bean> <bean id="empDAO" class="in.nit.dao.EmployeeDAOImpl2"> 
+		<constructor-arg ref="jtobj" /> </bean> -->
+
+
+</beans>
